@@ -16,7 +16,6 @@ def fit(array_polar):
     initial_guess = []
     # Fit
     params,covariance = curve_fit(ellipsengleichung, array_polar[:,0], array_polar[:,1], p0=initial_guess) # phi,r
-
     # datenpunkte des Fittes speichern (nur fürs plotten wichtig)
     fit_datenpunkte = ellipsengleichung(array_polar[:,0],*params)
     # exzentrizitaet für den print
@@ -27,7 +26,6 @@ def fit(array_polar):
         arr_abweichungskurve[k] = ellipsengleichung(array_polar[:,0][k],*params) - array_polar[:,1][k]
     # Plotten
     plt.scatter(array_polar[:,0],array_polar[:,1]) # Datenpunkte
-    #plt.scatter(array_polar[:,0],arr_abweichungskurve, color='r',label='Abweichungskurve')
     plt.scatter(array_polar[:,0],fit_datenpunkte,label='Fit-Kurve',colorizer='g') # Fit-Kurve
     plt.scatter(array_polar[:,0],ellipsengleichung(array_polar[:,0],*initial_guess),color='g',label='Initial Guess') # Initial Guess
     plt.xlabel('phi (Winkel)')
