@@ -11,16 +11,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 # Interne Abhängigkeiten
 from Fitting.abhaengigkeiten.ellipsengleichung import ellipsengleichung
-def fit(array_polar):
+def fit(array_polar, initial_guess):
     # berechnung der möglichen Ellipsenparameter
-    initial_guess = []
+    #initial_guess = []
     # Fit
     params,covariance = curve_fit(ellipsengleichung, array_polar[:,0], array_polar[:,1], p0=initial_guess) # phi,r
     # datenpunkte des Fittes speichern (nur fürs plotten wichtig)
     fit_datenpunkte = ellipsengleichung(array_polar[:,0],*params)
     # exzentrizitaet für den print
     exzentrizitaet = np.sqrt(params[1]**2-params[2]**2)/ params[1]
-    # Abweichungskurve zur Bestimmung des wharen mittelpunktes bestimmen
+    # Abweichungskurve zur optimierung des Mittelpunktes
     arr_abweichungskurve = np.ones_like(array_polar[:,0])
     for k in range(arr_abweichungskurve.size):
         arr_abweichungskurve[k] = ellipsengleichung(array_polar[:,0][k],*params) - array_polar[:,1][k]
@@ -32,4 +32,4 @@ def fit(array_polar):
     plt.ylabel('r (Abstand)')
     plt.show()
     #
-    return params, covariance, arr_abweichungskurve, exzentrizitaet
+    return params, covariance, arr_abweichungskurve, exzentrizitaet # die params werden für den zweiten fit übernommen und kommen in den initial guess
