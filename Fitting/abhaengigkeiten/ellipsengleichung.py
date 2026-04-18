@@ -6,5 +6,5 @@ import sys
 sys.path.append("./")
 #
 import numpy as np
-def ellipsen_gleichung(phi,e,b,c):
+def ellipsengleichung(phi,e,b,c):
     return b/np.sqrt(1-e**2*np.cos(phi+c)**2)

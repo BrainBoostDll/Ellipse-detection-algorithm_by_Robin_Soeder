@@ -9,11 +9,8 @@ sys.path.append("./")
 from scipy.optimize import curve_fit
 import numpy as np
 import matplotlib.pyplot as plt
-# Interne Abhängigkeiten
 from Fitting.abhaengigkeiten.ellipsengleichung import ellipsengleichung
 def fit(array_polar, initial_guess):
-    # berechnung der möglichen Ellipsenparameter
-    #initial_guess = []
     # Fit
     params,covariance = curve_fit(ellipsengleichung, array_polar[:,0], array_polar[:,1], p0=initial_guess) # phi,r
     # datenpunkte des Fittes speichern (nur fürs plotten wichtig)
